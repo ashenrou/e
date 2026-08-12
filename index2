@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust - Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+      color: #fff;
+    }
+
+    /* Navigation Bar */
+    header {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #ff7e5f;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .login-nav-btn {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+
+    /* Hero Section */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 50px 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #e0e0e0;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 126, 95, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="logo">✈️ Wander<span>Lust</span></a>
+    <nav>
+      <a href="index.html" class="nav-btn active">Home</a>
+      <a href="gallery.html" class="nav-btn">Gallery</a>
+      <a href="about.html" class="nav-btn">About Us</a>
+      <a href="login.html" class="nav-btn login-nav-btn">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Content -->
+  <main>
+    <div class="hero-content">
+      <h1>Explore The World With Us</h1>
+      <p>Discover breathtaking destinations, plan your dream itineraries, and embark on unforgettable journeys around the globe.</p>
+      <a href="gallery.html" class="cta-btn">View Destinations</a>
+    </div>
+  </main>
+
+</body>
+</html>
