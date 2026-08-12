@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust - Gallery</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    /* Navigation Bar */
+    header {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #ff7e5f;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .login-nav-btn {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+
+    /* Gallery Section */
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .gallery-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .gallery-header p {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-info {
+      padding: 20px;
+    }
+
+    .card-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .card-info p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="logo">✈️ Wander<span>Lust</span></a>
+    <nav>
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="gallery.html" class="nav-btn active">Gallery</a>
+      <a href="about.html" class="nav-btn">About Us</a>
+      <a href="login.html" class="nav-btn login-nav-btn">Login</a>
+    </nav>
+  </header>
+
+  <!-- Gallery Content -->
+  <main>
+    <div class="gallery-header">
+      <h1>Top Travel Destinations</h1>
+      <p>Explore some of the most breathtaking places across the world.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80" alt="Santorini, Greece" />
+        <div class="card-info">
+          <h3>Santorini, Greece</h3>
+          <p>Iconic whitewashed buildings overlooking the deep blue Aegean Sea.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80" alt="Kyoto, Japan" />
+        <div class="card-info">
+          <h3>Kyoto, Japan</h3>
+          <p>Tranquil bamboo groves, historic shrines, and timeless traditions.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Banff National Park, Canada" />
+        <div class="card-info">
+          <h3>Banff, Canada</h3>
+          <p>Crystal-clear turquoise lakes surrounded by soaring mountain peaks.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=800&q=80" alt="Machu Picchu, Peru" />
+        <div class="card-info">
+          <h3>Machu Picchu, Peru</h3>
+          <p>Ancient Incan citadel perched high in the Andes mountains.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80" alt="Amalfi Coast, Italy" />
+        <div class="card-info">
+          <h3>Amalfi Coast, Italy</h3>
+          <p>Dramatic coastal cliffs dotted with colorful Mediterranean villages.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" alt="Serengeti, Tanzania" />
+        <div class="card-info">
+          <h3>Serengeti, Tanzania</h3>
+          <p>Endless plains filled with incredible wildlife and safari adventures.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
