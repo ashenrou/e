@@ -1,0 +1,25 @@
+<script>
+  // Add blur-in animation on page load
+  document.body.classList.add('page-enter');
+
+  // Intercept nav links for motion blur transition on exit
+  document.querySelectorAll('nav a, .logo, .cta-btn').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const targetUrl = this.getAttribute('href');
+
+      // Only animate if navigating to another internal HTML file
+      if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+        e.preventDefault();
+        
+        // Trigger blur out
+        document.body.classList.remove('page-enter');
+        document.body.classList.add('page-exit');
+
+        // Navigate after blur animation finishes
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 300);
+      }
+    });
+  });
+</script>
