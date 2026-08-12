@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust - About Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                  url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+      color: #fff;
+    }
+
+    /* Navigation Bar */
+    header {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #ff7e5f;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .login-nav-btn {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+
+    /* About Section */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .about-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      text-align: center;
+    }
+
+    .about-card h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .about-card p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      margin-bottom: 25px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-item h2 {
+      font-size: 2rem;
+      color: #ff7e5f;
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="logo">✈️ Wander<span>Lust</span></a>
+    <nav>
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="gallery.html" class="nav-btn">Gallery</a>
+      <a href="about.html" class="nav-btn active">About Us</a>
+      <a href="login.html" class="nav-btn login-nav-btn">Login</a>
+    </nav>
+  </header>
+
+  <!-- About Content -->
+  <main>
+    <div class="about-card">
+      <h1>About Wanderlust</h1>
+      <p>
+        At Wanderlust, we believe travel is more than just visiting new places—it's about discovering new perspectives, experiencing diverse cultures, and creating memories that last a lifetime.
+      </p>
+      <p>
+        Our goal is to make travel planning seamless and inspiring. Whether you're seeking serene mountain escapes, vibrant city adventures, or tropical beaches, we are here to help guide your journey.
+      </p>
+
+      <div class="stats">
+        <div class="stat-item">
+          <h2>100+</h2>
+          <p>Destinations</p>
+        </div>
+        <div class="stat-item">
+          <h2>50k+</h2>
+          <p>Happy Travelers</p>
+        </div>
+        <div class="stat-item">
+          <h2>24/7</h2>
+          <p>Support</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
