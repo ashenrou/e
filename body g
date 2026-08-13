@@ -1,0 +1,32 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+  color: #fff;
+  transition: filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+body.page-exit {
+  filter: blur(12px) brightness(1.2);
+  transform: scale(0.98);
+  opacity: 0;
+}
+
+body.page-enter {
+  animation: motionBlurIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes motionBlurIn {
+  0% {
+    filter: blur(15px);
+    transform: scale(1.03);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
