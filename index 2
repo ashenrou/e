@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderlust - Mini Games</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+      color: #fff;
+      transition: filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Page Blur Animations */
+    body.page-exit {
+      filter: blur(12px) brightness(1.2);
+      transform: scale(0.98);
+      opacity: 0;
+    }
+
+    body.page-enter {
+      animation: motionBlurIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes motionBlurIn {
+      0% { filter: blur(15px); transform: scale(1.03); opacity: 0; }
+      100% { filter: blur(0px); transform: scale(1); opacity: 1; }
+    }
+
+    /* Navigation Bar */
+    header {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #ff7e5f;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .login-nav-btn {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+
+    /* Main Arcade Dashboard */
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .arcade-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .arcade-title h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* Game Selector Tabs */
+    .game-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+    }
+
+    .tab-btn:hover, .tab-btn.active-tab {
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
+    }
+
+    /* Game Container */
+    .game-card {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      min-height: 380px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .game-card.active-game {
+      display: flex;
+    }
+
+    .game-btn {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-top: 15px;
+    }
+
+    .game-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* --- GAME 1: TRIVIA STYLES --- */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 20px;
+    }
+
+    .trivia-opt {
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .trivia-opt:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* --- GAME 2: MEMORY GAME STYLES --- */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 400px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .memory-card.flipped {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    /* --- GAME 3: CLICKER GAME STYLES --- */
+    .clicker-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .plane-btn {
+      font-size: 5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .plane-btn:active {
+      transform: scale(0.85);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .memory-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="logo">✈️ Wander<span>Lust</span></a>
+    <nav>
+      <a href="index.html" class="nav-btn active">Home</a>
+      <a href="gallery.html" class="nav-btn">Gallery</a>
+      <a href="about.html" class="nav-btn">About Us</a>
+      <a href="login.html" class="nav-btn login-nav-btn">Login</a>
+    </nav>
+  </header>
+
+  <!-- Main Arcade Area -->
+  <main>
+    <div class="arcade-title">
+      <h1>🎮 Travel Arcade</h1>
+      <p>Pick a mini-game to play right here!</p>
+    </div>
+
+    <!-- Game Switcher Tabs -->
+    <div class="game-tabs">
+      <button class="tab-btn active-tab" onclick="switchGame('trivia')">🌍 Travel Trivia</button>
+      <button class="tab-btn" onclick="switchGame('memory')">🎴 Memory Match</button>
+      <button class="tab-btn" onclick="switchGame('clicker')">✈️ Miles Clicker</button>
+    </div>
+
+    <!-- GAME 1: TRIVIA -->
+    <div id="game-trivia" class="game-card active-game">
+      <h2 id="quiz-question">Loading Question...</h2>
+      <div class="options-grid" id="quiz-options"></div>
+      <p id="quiz-score" style="margin-top: 20px; color: #ff7e5f; font-weight: bold;">Score: 0</p>
+    </div>
+
+    <!-- GAME 2: MEMORY MATCH -->
+    <div id="game-memory" class="game-card">
+      <h2>Match the Travel Icons</h2>
+      <p id="memory-stats" style="margin-top: 5px; color: #ddd;">Moves: 0</p>
+      <div class="memory-grid" id="memory-board"></div>
+      <button class="game-btn" onclick="resetMemoryGame()">Restart Game</button>
+    </div>
+
+    <!-- GAME 3: MILES CLICKER -->
+    <div id="game-clicker" class="game-card">
+      <div class="clicker-box">
+        <h2>Fly to Earn Miles!</h2>
+        <h3 id="miles-count" style="font-size: 2rem; color: #ff7e5f;">0 Miles</h3>
+        <button class="plane-btn" id="click-plane" onclick="addMiles()">✈️</button>
+        <button class="game-btn" onclick="buyUpgrade()">Buy Speed Upgrade (Cost: <span id="upgrade-cost">20</span> Miles)</button>
+        <p id="clicker-msg" style="font-size: 0.85rem; color: #aaa;">Click the plane to collect flight miles!</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Interactive Game Logic & Page Transitions -->
+  <script>
+    // --- PAGE MOTION BLUR TRANSITION ---
+    document.body.classList.add('page-enter');
+
+    document.querySelectorAll('nav a, .logo').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+          setTimeout(() => { window.location.href = targetUrl; }, 300);
+        }
+      });
+    });
+
+    // --- TAB SWITCHER LOGIC ---
+    function switchGame(gameName) {
+      document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active-game'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+
+      document.getElementById('game-' + gameName).classList.add('active-game');
+      event.target.classList.add('active-tab');
+    }
+
+    // --- GAME 1: TRIVIA LOGIC ---
+    const triviaData = [
+      { q: "Which city is home to the Eiffel Tower?", opts: ["Rome", "Paris", "London", "Berlin"], ans: "Paris" },
+      { q: "What is the capital of Japan?", opts: ["Kyoto", "Osaka", "Tokyo", "Seoul"], ans: "Tokyo" },
+      { q: "Where can you find the ancient Incan citadel Machu Picchu?", opts: ["Peru", "Chile", "Brazil", "Mexico"], ans: "Peru" },
+      { q: "Which landmark is located in Agra, India?", opts: ["Colosseum", "Taj Mahal", "Petra", "Christ the Redeemer"], ans: "Taj Mahal" }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const qObj = triviaData[currentQ];
+      document.getElementById('quiz-question').textContent = qObj.q;
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      qObj.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'trivia-opt';
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedOpt) {
+      if (selectedOpt === triviaData[currentQ].ans) {
+        score += 10;
+        alert("Correct! +10 Points");
+      } else {
+        alert("Oops! Correct answer was " + triviaData[currentQ].ans);
+      }
+      document.getElementById('quiz-score').textContent = "Score: " + score;
+      currentQ = (currentQ + 1) % triviaData.length;
+      loadQuestion();
+    }
+    loadQuestion();
+
+    // --- GAME 2: MEMORY MATCH LOGIC ---
+    const icons = ['✈️', '✈️', '🏝️', '🏝️', '🗿', '🗿', '🏔️', '🏔️'];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+
+    function resetMemoryGame() {
+      const board = document.getElementById('memory-board');
+      board.innerHTML = '';
+      flippedCards = [];
+      matchedPairs = 0;
+      moves = 0;
+      document.getElementById('memory-stats').textContent = "Moves: 0";
+
+      const shuffled = [...icons].sort(() => Math.random() - 0.5);
+      shuffled.forEach((icon) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.icon = icon;
+        card.textContent = '❓';
+        card.onclick = () => flipCard(card);
+        board.appendChild(card);
+      });
+    }
+
+    function flipCard(card) {
+      if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        card.textContent = card.dataset.icon;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+          moves++;
+          document.getElementById('memory-stats').textContent = "Moves: " + moves;
+          if (flippedCards[0].dataset.icon === flippedCards[1].dataset.icon) {
+            matchedPairs++;
+            flippedCards = [];
+            if (matchedPairs === 4) setTimeout(() => alert("You Won in " + moves + " moves!"), 200);
+          } else {
+            setTimeout(() => {
+              flippedCards.forEach(c => { c.classList.remove('flipped'); c.textContent = '❓'; });
+              flippedCards = [];
+            }, 800);
+          }
+        }
+      }
+    }
+    resetMemoryGame();
+
+    // --- GAME 3: MILES CLICKER LOGIC ---
+    let miles = 0;
+    let milesPerClick = 1;
+    let upgradeCost = 20;
+
+    function addMiles() {
+      miles += milesPerClick;
+      document.getElementById('miles-count').textContent = miles + " Miles";
+    }
+
+    function buyUpgrade() {
+      if (miles >= upgradeCost) {
+        miles -= upgradeCost;
+        milesPerClick += 2;
+        upgradeCost = Math.round(upgradeCost * 1.8);
+        document.getElementById('miles-count').textContent = miles + " Miles";
+        document.getElementById('upgrade-cost').textContent = upgradeCost;
+        document.getElementById('clicker-msg').textContent = "Upgrade purchased! Now getting " + milesPerClick + " miles per click!";
+      } else {
+        alert("Not enough miles!");
+      }
+    }
+  </script>
+</body>
+</html>
