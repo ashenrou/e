@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WANDERLUST — Issue No. 01</title>
+  
+  <!-- Import Bold Editorial Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables for Light/Dark Theme Switching */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --border-color: #000000;
+      --card-bg: #f8f8f8;
+      --accent-hover: #000000;
+      --accent-text-hover: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --border-color: #ffffff;
+      --card-bg: #141414;
+      --accent-hover: #ffffff;
+      --accent-text-hover: #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Motion Blur Page Animations */
+    body.page-exit {
+      filter: blur(12px) brightness(1.1);
+      transform: scale(0.98);
+      opacity: 0;
+    }
+
+    body.page-enter {
+      animation: motionBlurIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes motionBlurIn {
+      0% { filter: blur(15px); transform: scale(1.02); opacity: 0; }
+      100% { filter: blur(0px); transform: scale(1); opacity: 1; }
+    }
+
+    /* Header & Navigation */
+    header {
+      width: 100%;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      border-color: var(--border-color);
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* Magazine Headline Section */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    .magazine-header {
+      text-align: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 40px;
+      margin-bottom: 50px;
+    }
+
+    .issue-tag {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .magazine-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    /* Game Tab Controls */
+    .game-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .tab-btn {
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 12px 28px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover, .tab-btn.active-tab {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* Editorial Game Cards */
+    .game-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      padding: 40px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 8px 8px 0px var(--border-color);
+    }
+
+    .game-card.active-game {
+      display: flex;
+    }
+
+    .game-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .action-btn {
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 12px 24px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* --- GAME 1: TRIVIA --- */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 25px;
+    }
+
+    .trivia-opt {
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .trivia-opt:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* --- GAME 2: MEMORY MATCH --- */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 450px;
+      width: 100%;
+      margin-top: 25px;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .memory-card.flipped {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* --- GAME 3: CLICKER --- */
+    .clicker-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .plane-btn {
+      font-size: 5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .plane-btn:active {
+      transform: scale(0.85);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      .magazine-header h1 {
+        font-size: 2.5rem;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="logo">Wanderlust</a>
+    <nav>
+      <a href="index.html" class="nav-btn active">Home</a>
+      <a href="gallery.html" class="nav-btn">Gallery</a>
+      <a href="about.html" class="nav-btn">About Us</a>
+      <a href="login.html" class="nav-btn">Login</a>
+      <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+    </nav>
+  </header>
+
+  <!-- Main Editorial Content -->
+  <main>
+    <div class="magazine-header">
+      <span class="issue-tag">VOL. 01 — Interactive Edition</span>
+      <h1>The Travel Arcade</h1>
+    </div>
+
+    <!-- Game Switcher Tabs -->
+    <div class="game-tabs">
+      <button class="tab-btn active-tab" onclick="switchGame('trivia')">Trivia</button>
+      <button class="tab-btn" onclick="switchGame('memory')">Memory</button>
+      <button class="tab-btn" onclick="switchGame('clicker')">Miles Clicker</button>
+    </div>
+
+    <!-- GAME 1: TRIVIA -->
+    <div id="game-trivia" class="game-card active-game">
+      <h2 class="game-title" id="quiz-question">Loading Question...</h2>
+      <div class="options-grid" id="quiz-options"></div>
+      <p id="quiz-score" style="margin-top: 25px; font-family: 'Syne', sans-serif; font-weight: 800; text-transform: uppercase;">Score: 0</p>
+    </div>
+
+    <!-- GAME 2: MEMORY MATCH -->
+    <div id="game-memory" class="game-card">
+      <h2 class="game-title">Memory Match</h2>
+      <p id="memory-stats" style="font-family: 'Syne', sans-serif; font-weight: 800;">MOVES: 0</p>
+      <div class="memory-grid" id="memory-board"></div>
+      <button class="action-btn" onclick="resetMemoryGame()">Restart Game</button>
+    </div>
+
+    <!-- GAME 3: MILES CLICKER -->
+    <div id="game-clicker" class="game-card">
+      <div class="clicker-box">
+        <h2 class="game-title">Flight Miles</h2>
+        <h3 id="miles-count" style="font-size: 2.5rem; font-weight: 800; font-family: 'Syne', sans-serif;">0 MILES</h3>
+        <button class="plane-btn" id="click-plane" onclick="addMiles()">✈️</button>
+        <button class="action-btn" onclick="buyUpgrade()">Speed Upgrade (Cost: <span id="upgrade-cost">20</span> Miles)</button>
+        <p id="clicker-msg" style="font-size: 0.85rem; opacity: 0.7; margin-top: 10px;">Click the aircraft to log miles.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+    // --- THEME TOGGLE LOGIC ---
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const themeBtn = document.getElementById('theme-btn');
+      
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeBtn.textContent = 'Dark Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = 'Light Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Load saved theme setting
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      document.getElementById('theme-btn').textContent = 'Light Mode';
+    }
+
+    // --- MOTION BLUR TRANSITION ---
+    document.body.classList.add('page-enter');
+
+    document.querySelectorAll('nav a, .logo').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+          setTimeout(() => { window.location.href = targetUrl; }, 300);
+        }
+      });
+    });
+
+    // --- TAB SWITCHER LOGIC ---
+    function switchGame(gameName) {
+      document.querySelectorAll('.game-card').forEach(card => card.classList.remove('active-game'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+
+      document.getElementById('game-' + gameName).classList.add('active-game');
+      event.target.classList.add('active-tab');
+    }
+
+    // --- GAME 1: TRIVIA LOGIC ---
+    const triviaData = [
+      { q: "Which city is home to the Eiffel Tower?", opts: ["Rome", "Paris", "London", "Berlin"], ans: "Paris" },
+      { q: "What is the capital of Japan?", opts: ["Kyoto", "Osaka", "Tokyo", "Seoul"], ans: "Tokyo" },
+      { q: "Where can you find the ancient Incan citadel Machu Picchu?", opts: ["Peru", "Chile", "Brazil", "Mexico"], ans: "Peru" },
+      { q: "Which landmark is located in Agra, India?", opts: ["Colosseum", "Taj Mahal", "Petra", "Christ the Redeemer"], ans: "Taj Mahal" },
+      { q: "Which nation has the most natural lakes in the world?", opts: ["Canada", "Russia", "USA", "Finland"], ans: "Canada" },
+      { q: "What is the smallest country in the world by land area?", opts: ["Monaco", "Malta", "Vatican City", "San Marino"], ans: "Vatican City" },
+      { q: "Which Australian landmark is known as Uluru?", opts: ["Sydney Opera House", "Ayers Rock", "Great Barrier Reef", "Twelve Apostles"], ans: "Ayers Rock" },
+      { q: "In which European country can you visit Pompeii?", opts: ["Greece", "Spain", "Italy", "Turkey"], ans: "Italy" },
+      { q: "Which river flows through the Grand Canyon?", opts: ["Mississippi River", "Colorado River", "Rio Grande", "Columbia River"], ans: "Colorado River" },
+      { q: "Which African country is famous for the Great Sphinx?", opts: ["Morocco", "Egypt", "Kenya", "South Africa"], ans: "Egypt" }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const qObj = triviaData[currentQ];
+      document.getElementById('quiz-question').textContent = `${qObj.q}`;
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      qObj.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'trivia-opt';
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedOpt) {
+      if (selectedOpt === triviaData[currentQ].ans) {
+        score += 10;
+        alert("Correct! +10 Points");
+      } else {
+        alert("Incorrect! Answer: " + triviaData[currentQ].ans);
+      }
+      document.getElementById('quiz-score').textContent = "Score: " + score;
+      currentQ = (currentQ + 1) % triviaData.length;
+      loadQuestion();
+    }
+    loadQuestion();
+
+    // --- GAME 2: MEMORY MATCH LOGIC ---
+    const icons = ['✈️', '✈️', '🏝️', '🏝️', '🗿', '🗿', '🏔️', '🏔️'];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+
+    function resetMemoryGame() {
+      const board = document.getElementById('memory-board');
+      board.innerHTML = '';
+      flippedCards = [];
+      matchedPairs = 0;
+      moves = 0;
+      document.getElementById('memory-stats').textContent = "MOVES: 0";
+
+      const shuffled = [...icons].sort(() => Math.random() - 0.5);
+      shuffled.forEach((icon) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.icon = icon;
+        card.textContent = '◼';
+        card.onclick = () => flipCard(card);
+        board.appendChild(card);
+      });
+    }
+
+    function flipCard(card) {
+      if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        card.textContent = card.dataset.icon;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+          moves++;
+          document.getElementById('memory-stats').textContent = "MOVES: " + moves;
+          if (flippedCards[0].dataset.icon === flippedCards[1].dataset.icon) {
+            matchedPairs++;
+            flippedCards = [];
+            if (matchedPairs === 4) setTimeout(() => alert("Completed in " + moves + " moves!"), 200);
+          } else {
+            setTimeout(() => {
+              flippedCards.forEach(c => { c.classList.remove('flipped'); c.textContent = '◼'; });
+              flippedCards = [];
+            }, 800);
+          }
+        }
+      }
+    }
+    resetMemoryGame();
+
+    // --- GAME 3: MILES CLICKER LOGIC ---
+    let miles = 0;
+    let milesPerClick = 1;
+    let upgradeCost = 20;
+
+    function addMiles() {
+      miles += milesPerClick;
+      document.getElementById('miles-count').textContent = miles + " MILES";
+    }
+
+    function buyUpgrade() {
+      if (miles >= upgradeCost) {
+        miles -= upgradeCost;
+        milesPerClick += 2;
+        upgradeCost = Math.round(upgradeCost * 1.8);
+        document.getElementById('miles-count').textContent = miles + " MILES";
+        document.getElementById('upgrade-cost').textContent = upgradeCost;
+        document.getElementById('clicker-msg').textContent = "Upgrade acquired! Earning " + milesPerClick + " miles per click.";
+      } else {
+        alert("Insufficient miles!");
+      }
+    }
+  </script>
+</body>
+</html>
