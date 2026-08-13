@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WANDERLUST — Login</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Syne:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --border-color: #000000;
+      --card-bg: #f8f8f8;
+      --accent-hover: #000000;
+      --accent-text-hover: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --border-color: #ffffff;
+      --card-bg: #141414;
+      --accent-hover: #ffffff;
+      --accent-text-hover: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Motion Blur Page Animations */
+    body.page-exit {
+      filter: blur(12px) brightness(1.1);
+      transform: scale(0.98);
+      opacity: 0;
+    }
+
+    body.page-enter {
+      animation: motionBlurIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes motionBlurIn {
+      0% { filter: blur(15px); transform: scale(1.02); opacity: 0; }
+      100% { filter: blur(0px); transform: scale(1); opacity: 1; }
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    nav { display: flex; align-items: center; gap: 20px; }
+
+    .nav-btn {
+      text-decoration: none;
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      border-color: var(--border-color);
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    /* Form Container */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      padding: 40px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 8px 8px 0px var(--border-color);
+    }
+
+    .login-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 14px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    .msg-box {
+      margin-top: 15px;
+      padding: 10px;
+      border: 2px solid var(--border-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-align: center;
+      text-transform: uppercase;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Wanderlust</a>
+    <nav>
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="gallery.html" class="nav-btn">Gallery</a>
+      <a href="about.html" class="nav-btn">About Us</a>
+      <a href="login.html" class="nav-btn active">Login</a>
+      <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-card">
+      <h1>Portal Login</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="admin@travel.com">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="travel123">
+        </div>
+        <button type="submit" class="submit-btn">Access Account</button>
+      </form>
+      <div id="message-box" class="msg-box"></div>
+    </div>
+  </main>
+
+  <script>
+    // Theme Toggle Logic
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const themeBtn = document.getElementById('theme-btn');
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeBtn.textContent = 'Dark Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = 'Light Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') document.getElementById('theme-btn').textContent = 'Light Mode';
+
+    // Motion Blur Page Transitions
+    document.body.classList.add('page-enter');
+    document.querySelectorAll('nav a, .logo').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+          setTimeout(() => { window.location.href = targetUrl; }, 300);
+        }
+      });
+    });
+
+    // Login Authentication
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email').value;
+      const passwordInput = document.getElementById('password').value;
+      const messageBox = document.getElementById('message-box');
+
+      if (emailInput === "admin@travel.com" && passwordInput === "travel123") {
+        messageBox.textContent = "SUCCESS. REDIRECTING...";
+        messageBox.style.display = "block";
+        setTimeout(() => {
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+          setTimeout(() => { window.location.href = "index.html"; }, 300);
+        }, 1000);
+      } else {
+        messageBox.textContent = "INVALID CREDENTIALS.";
+        messageBox.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
