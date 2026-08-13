@@ -1,0 +1,44 @@
+    // --- GAME 1: TRIVIA LOGIC ---
+    const triviaData = [
+      { q: "Which city is home to the Eiffel Tower?", opts: ["Rome", "Paris", "London", "Berlin"], ans: "Paris" },
+      { q: "What is the capital of Japan?", opts: ["Kyoto", "Osaka", "Tokyo", "Seoul"], ans: "Tokyo" },
+      { q: "Where can you find the ancient Incan citadel Machu Picchu?", opts: ["Peru", "Chile", "Brazil", "Mexico"], ans: "Peru" },
+      { q: "Which landmark is located in Agra, India?", opts: ["Colosseum", "Taj Mahal", "Petra", "Christ the Redeemer"], ans: "Taj Mahal" },
+      { q: "Which nation has the most natural lakes in the world?", opts: ["Canada", "Russia", "USA", "Finland"], ans: "Canada" },
+      { q: "What is the smallest country in the world by land area?", opts: ["Monaco", "Malta", "Vatican City", "San Marino"], ans: "Vatican City" },
+      { q: "Which Australian landmark is known as Uluru?", opts: ["Sydney Opera House", "Ayers Rock", "Great Barrier Reef", "Twelve Apostles"], ans: "Ayers Rock" },
+      { q: "In which European country can you visit the ancient ruin city of Pompeii?", opts: ["Greece", "Spain", "Italy", "Turkey"], ans: "Italy" },
+      { q: "Which river flows through the Grand Canyon?", opts: ["Mississippi River", "Colorado River", "Rio Grande", "Columbia River"], ans: "Colorado River" },
+      { q: "Which African country is famous for its pyramids and the Sphinx?", opts: ["Morocco", "Egypt", "Kenya", "South Africa"], ans: "Egypt" }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const qObj = triviaData[currentQ];
+      document.getElementById('quiz-question').textContent = `Q${currentQ + 1}/${triviaData.length}: ${qObj.q}`;
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      qObj.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'trivia-opt';
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedOpt) {
+      if (selectedOpt === triviaData[currentQ].ans) {
+        score += 10;
+        alert("Correct! +10 Points");
+      } else {
+        alert("Oops! Correct answer was " + triviaData[currentQ].ans);
+      }
+      document.getElementById('quiz-score').textContent = "Score: " + score;
+      currentQ = (currentQ + 1) % triviaData.length;
+      loadQuestion();
+    }
+    loadQuestion();
