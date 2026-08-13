@@ -1,0 +1,24 @@
+  <!-- Motion Blur Transition Script -->
+  <script>
+    // Add blur-in animation on page load
+    document.body.classList.add('page-enter');
+
+    // Intercept nav links and CTA buttons for motion blur transition on exit
+    document.querySelectorAll('nav a, .logo, .cta-btn').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 300);
+        }
+      });
+    });
+  </script>
+</body>
