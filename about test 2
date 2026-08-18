@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WANDERLUST — About Us</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Syne:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --border-color: #000000;
+      --card-bg: #f8f8f8;
+      --accent-hover: #000000;
+      --accent-text-hover: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --border-color: #ffffff;
+      --card-bg: #141414;
+      --accent-hover: #ffffff;
+      --accent-text-hover: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    body.page-exit {
+      filter: blur(12px) brightness(1.1);
+      transform: scale(0.98);
+      opacity: 0;
+    }
+
+    body.page-enter {
+      animation: motionBlurIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes motionBlurIn {
+      0% { filter: blur(15px); transform: scale(1.02); opacity: 0; }
+      100% { filter: blur(0px); transform: scale(1); opacity: 1; }
+    }
+
+    header {
+      width: 100%;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    nav { display: flex; align-items: center; gap: 15px; }
+
+    .nav-btn {
+      text-decoration: none;
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      border-color: var(--border-color);
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    .about-header {
+      text-align: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 30px;
+      margin-bottom: 40px;
+    }
+
+    .about-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .about-header p {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      box-shadow: 6px 6px 0px var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .team-info {
+      padding: 25px;
+    }
+
+    .team-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .team-info p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; padding: 20px; }
+      .about-header h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">Wanderlust</a>
+    <nav id="navbar">
+      <!-- Generated dynamically by Auth Guard Script -->
+    </nav>
+  </header>
+
+  <main>
+    <div class="about-header">
+      <h1>Meet the Creators</h1>
+      <p>THE MINDS BEHIND WANDERLUST NEGROS ORIENTAL</p>
+    </div>
+
+    <div class="team-grid">
+      <!-- Creator 1 -->
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Sieff Dwyne L. Yusingco" />
+        <div class="team-info">
+          <h2>Sieff Dwyne L. Yusingco</h2>
+          <p>Add description here.</p>
+        </div>
+      </div>
+
+      <!-- Creator 2 -->
+      <div class="team-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Renz Pigoracion" />
+        <div class="team-info">
+          <h2>Renz Pigoracion</h2>
+          <p>Add description here.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // --- AUTH GUARD & DYNAMIC NAVBAR ---
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('navbar');
+      nav.innerHTML = `
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="gallery.html" class="nav-btn">Gallery</a>
+        <a href="about.html" class="nav-btn active">About Us</a>
+        <button class="nav-btn" onclick="handleLogout()">Logout</button>
+        <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+      `;
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('isLoggedIn');
+      window.location.href = 'login.html';
+    }
+
+    renderNav();
+
+    // --- THEME TOGGLE LOGIC ---
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const themeBtn = document.getElementById('theme-btn');
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        if (themeBtn) themeBtn.textContent = 'Dark Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = 'Light Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const btn = document.getElementById('theme-btn');
+    if (btn && savedTheme === 'dark') btn.textContent = 'Light Mode';
+
+    // --- PAGE TRANSITIONS ---
+    document.body.classList.add('page-enter');
+    document.querySelectorAll('nav a, .logo').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+          e.preventDefault();
+          document.body.classList.remove('page-enter');
+          document.body.classList.add('page-exit');
+          setTimeout(() => { window.location.href = targetUrl; }, 300);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
