@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WANDERLUST — Login</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Syne:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --border-color: #000000;
+      --card-bg: #f8f8f8;
+      --accent-hover: #000000;
+      --accent-text-hover: #ffffff;
+      --demo-bg: #eeeeee;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0a0a0a;
+      --text-color: #ffffff;
+      --border-color: #ffffff;
+      --card-bg: #141414;
+      --accent-hover: #ffffff;
+      --accent-text-hover: #000000;
+      --demo-bg: #222222;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    header {
+      width: 100%;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    nav { display: flex; align-items: center; gap: 20px; }
+
+    .nav-btn {
+      text-decoration: none;
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.active {
+      border-color: var(--border-color);
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 8px 16px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      padding: 35px;
+      box-shadow: 6px 6px 0px var(--border-color);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Demo Credentials Banner */
+    .demo-credentials {
+      background: var(--demo-bg);
+      border: 2px dashed var(--border-color);
+      padding: 15px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .demo-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .demo-info {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .autofill-btn {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .autofill-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--border-color);
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      background: var(--card-bg);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--bg-color);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent-text-hover);
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: 15px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="login.html" class="logo">Wanderlust</a>
+    <nav>
+      <a href="login.html" class="nav-btn active">Login</a>
+      <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+
+      <!-- Demo Credentials Notice -->
+      <div class="demo-credentials">
+        <div class="demo-title">🔑 Demo Access Credentials</div>
+        <div class="demo-info">
+          <strong>Username:</strong> admin<br>
+          <strong>Password:</strong> password123
+        </div>
+        <button class="autofill-btn" onclick="fillDemoCredentials()">Auto-fill Form</button>
+      </div>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" required placeholder="Enter username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="Enter password">
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Theme Toggle Logic
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const themeBtn = document.getElementById('theme-btn');
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeBtn.textContent = 'Dark Mode';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = 'Light Mode';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Load persisted theme on page startup
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') document.getElementById('theme-btn').textContent = 'Light Mode';
+
+    // Auto-fill Demo Credentials
+    function fillDemoCredentials() {
+      document.getElementById('username').value = 'admin';
+      document.getElementById('password').value = 'password123';
+    }
+
+    // Login Authentication Logic
+    function handleLogin(e) {
+      e.preventDefault();
+      localStorage.setItem('isLoggedIn', 'true');
+      window.location.href = 'index.html';
+    }
+
+    // Redirect to home if already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
